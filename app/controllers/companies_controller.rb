@@ -1,7 +1,12 @@
 class CompaniesController < ApplicationController
+
   def index
     @companies = Company.all
   end
+
+  # def job_index
+  #   @company = Company.find(params[:id])
+  # end
 
   def new
     @company = Company.new
