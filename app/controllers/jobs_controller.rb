@@ -3,7 +3,7 @@ class JobsController < ApplicationController
 
   def index
     @company = Company.find(params[:company_id])
-    @jobs = Job.all
+    @jobs = @company.jobs
   end
 
   def new
