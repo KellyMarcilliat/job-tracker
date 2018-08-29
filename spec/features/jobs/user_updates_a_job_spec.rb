@@ -5,23 +5,26 @@ describe 'Job Edit' do
     it 'should update a job' do
       category = Category.create(title: "Cat 1")
       company = Company.create(name: "Shopify")
-      job = company.jobs.create(title: "First Job", level_of_interest: 90, city: "Denver", category_id: category.id)
+      job = company.jobs.create!(title: "Developer", level_of_interest: 70, city: "Denver", category_id: category.id)
 
-      visit company_job_path(company, job)
+      visit job_path(job)
 
-      click_link("Edit")
-      expect(current_path).to eq(edit_company_job_path(company, job))
+      click_link "Edit"
 
-      fill_in("job[title]", with: "New Title")
-      fill_in("job[level_of_interest]", with: 75)
-      fill_in("job[city]", with: "Aurora")
-      click_on("Update Job")
+      expect(current_path).to eq(edit_job_path(job))
 
-      expect(current_path).to eq(company_job_path(company, job))
+      fill_in "job[title]", with: "Analyst"
+      fill_in "job[description]", with: "So fun!"
+      select "5 stars", from: "job[level_of_interest]"
+      fill_in "job[city]", with: "San Francisco"
 
-      expect(page).to have_content("New Title")
-      expect(page).to_not have_content("First Job")
+      click_button "Update"
 
+      expect(current_path).to eq(job_path(job))
+      expect(page).to have_content("Analyst")
+      expect(page).to have_content("So fun!")
+      expect(page).to have_content("5")
+      expect(page).to have_content("San Francisco")
     end
   end
 end

@@ -1,14 +1,12 @@
 Rails.application.routes.draw do
 
   resources :companies do
-    resources :contacts
+    resources :jobs, only: [:index]
   end
-  # get '/companies/:id/jobs', to: 'companies#job_index', as: :company_jobs
-  resources :jobs do
-    resources :comments
-  end
+  resources :jobs
   resources :categories
-  get '/dashboard', to: 'dashboards#index', as: :dashboard
+end
+
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
@@ -64,4 +62,3 @@ Rails.application.routes.draw do
   #     # (app/controllers/admin/products_controller.rb)
   #     resources :products
   #   end
-end
