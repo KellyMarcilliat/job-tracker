@@ -1,15 +1,8 @@
-Title: <%= @job.title %>
-<br>
-
-Description: <%= @job.description %>
-<br>
-
-<p>Level of Interest: <%= @job.level_of_interest %></p>
-
-
-City: <%= @job.city %>
-<br>
-
-Company: <%= link_to @job.company.name, job_path(@job) %>
-
 <%= link_to "Edit", edit_job_path(@job) %>
+<%= link_to 'Add New Job', new_job_path %>
+
+Title: <%= @job.title %>
+Description: <%= @job.description %>
+Level of Interest: <%= @job.level_of_interest %>
+City: <%= @job.city %>
+Company: <%= link_to @job.company.name, job_path(@job) %>
